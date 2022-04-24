@@ -32,6 +32,9 @@ spec:
           - name: mysql-persistent-storage
             mountPath: /var/lib/mysql
       volumes:
+        - name: mysql-config
+          configMap:
+            name: mysql-config
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pv-claim

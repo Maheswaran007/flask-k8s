@@ -37,8 +37,8 @@ The API can only be used if the proper database and schemas are set. This can be
    `kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql --host mysql --password=<super-secret-password>`
    make sure to enter the (decoded) password specified in the `flaskapi-secrets.yml`
 2. Create the database and table
-   1. `CREATE DATABASE flaskapi;`
-    2. `USE flaskapi;`
+   1. `CREATE DATABASE userdb;`
+    2. `USE userdb;`
     3. `CREATE TABLE users(user_id INT PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(255), user_email VARCHAR(255), user_password VARCHAR(255));`
     
 ## Expose the API
