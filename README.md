@@ -1,4 +1,4 @@
-# Deploying a Flask API and MySQL server on Kubernetes
+p# Deploying a Flask API and MySQL server on Kubernetes
 
 This repo contains code that 
 1) Deploys a MySQL server on a Kubernetes cluster
@@ -24,23 +24,14 @@ This repo contains code that
 ## Deployments
 Get the secrets, persistent volume in place and apply the deployments for the `MySQL` database and `Flask API`
 
-1. Add the secrets to your `kubernetes cluster`: `kubectl apply -f flaskapi-secrets.yml`
-2. Create the `persistent volume` and `persistent volume claim` for the database: `kubectl apply -f mysql-pv.yml`
-3. Create the `MySQL` deployment: `kubectl apply -f mysql-deployment.yml`
-4. Create the `Flask API` deployment: `kubectl apply -f flaskapp-deployment.yml`
+1. Add the secrets to your `kubernetes cluster`: `kubectl apply -f flaskapi-secrets.yml, kubectl apply -f mysql-secrets.yml`
+2. Add mysql db by applying configmap, this will create a database in mysql pod if it does not exist `kubectl apply -f mysql-configmap.yml`
+3. Create the `persistent volume` and `persistent volume claim` for the database: `kubectl apply -f mysql-pv.yml`
+4. Create the `MySQL` deployment: `kubectl apply -f mysql-deployment.yml`
+5. Create the `Flask API` deployment: `kubectl apply -f flaskapp-deployment.yml`
 
 You can check the status of the pods, services and deployments.
 
-## Creating database and schema
-The API can only be used if the proper database and schemas are set. This can be done via the terminal.
-1. Connect to your `MySQL database` by setting up a temporary pod as a `mysql-client`: 
-   `kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql --host mysql --password=<super-secret-password>`
-   make sure to enter the (decoded) password specified in the `flaskapi-secrets.yml`
-2. Create the database and table
-   1. `CREATE DATABASE userdb;`
-    2. `USE userdb;`
-    3. `CREATE TABLE users(user_id INT PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(255), user_email VARCHAR(255), user_password VARCHAR(255));`
-    
 ## Expose the API
 The API can be accessed by exposing it using minikube: `minikube service flask-service`. This will return a `URL`. If you paste this to your browser you will see the `hello world` message. You can use this `service_URL` to make requests to the `API`
 
