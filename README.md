@@ -1,4 +1,4 @@
-p# Deploying a Flask API and MySQL server on Kubernetes
+# Deploying a Flask API and MySQL server on Kubernetes
 
 This repo contains code that 
 1) Deploys a MySQL server on a Kubernetes cluster
